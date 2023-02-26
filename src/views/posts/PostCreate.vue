@@ -1,5 +1,5 @@
 <template>
-	<h2>글쓰기</h2>
+	<h2>게시글 생성</h2>
 	<hr class="my-4" />
 	<form>
 		<div class="mb-3">
@@ -11,9 +11,16 @@
 			<textarea class="form-control" id="userContent" placeholder="content"></textarea>
 		</div>
 		<div>
-			<button type="button" class="btn btn-outline-secondary me-2">목록</button>
+			<button type="button" class="btn btn-outline-secondary me-2" @click="goListPage">목록</button>
 			<button type="button" class="btn btn-primary">저장</button>
 		</div>
 	</form>
 </template>
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const goListPage = () => {
+	router.push({ name: 'Posts' });
+};
+</script>

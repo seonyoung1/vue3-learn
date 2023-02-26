@@ -25,9 +25,12 @@
 						<li class="nav-item">
 							<RouterLink to="/posts" active-class="active" class="nav-link">Posts</RouterLink>
 						</li>
+						<li class="nav-item">
+							<RouterLink to="/nested" active-class="active" class="nav-link">Nested</RouterLink>
+						</li>
 					</ul>
 					<form class="d-flex" role="search">
-						<button class="btn btn-outline-light" type="button" @click="goPage">글쓰기</button>
+						<button class="btn btn-outline-light" type="button" @click="goPage">New</button>
 					</form>
 				</div>
 			</div>

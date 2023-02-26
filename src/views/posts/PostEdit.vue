@@ -1,4 +1,28 @@
 <template>
-	<div>수정</div>
+	<h2>게시글 수정</h2>
+	<hr class="my-4" />
+	<form>
+		<div class="mb-3">
+			<label for="userTitle" class="form-label">제목</label>
+			<input type="text" class="form-control" id="userTitle" placeholder="title" />
+		</div>
+		<div class="mb-3">
+			<label for="userContent" class="form-label">내용</label>
+			<textarea class="form-control" id="userContent" placeholder="content"></textarea>
+		</div>
+		<div>
+			<button type="button" class="btn btn-outline-danger me-2" @click="goDetailPage()">취소</button>
+			<button type="button" class="btn btn-primary">수정</button>
+		</div>
+	</form>
 </template>
-<script setup></script>
+<script setup>
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+const id = route.params.id;
+const goDetailPage = () => {
+	router.push({ name: 'PostDetail', params: { id } });
+};
+</script>
