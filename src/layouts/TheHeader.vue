@@ -17,7 +17,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item">
-							<RouterLink to="/" active-class="active" class="nav-link" aria-current="page">Home</RouterLink>
+							<RouterLink to="/" active-class="active" class="nav-link">Home</RouterLink>
 						</li>
 						<li class="nav-item">
 							<RouterLink to="/about" active-class="active" class="nav-link">Link</RouterLink>
@@ -41,6 +41,6 @@
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const goPage = () => {
-	router.push('/posts/create');
+	router.push({ name: 'PostCreate' });
 };
 </script>
