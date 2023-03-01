@@ -5,10 +5,13 @@
 	<hr class="my-4" />
 	<AppLists :items="posts" col-class="col-4">
 		<template v-slot="{ item }">
-			<PostItem :title="item.title" :content="item.content" :created-at="item.createdAt" @click="goPage(item.id)" />
+			<PostItem :title="item.title" :content="item.content" :created-at="item.createdAt" @click="goPage(item.id)" @modal="openModal(item)" />
 		</template>
 	</AppLists>
 	<AppPagination :currentPage="params._page" :pageCount="pageCount" @page="goPagination"></AppPagination>
+	<Teleport to="#modal">
+		<PostModal v-model="isShow" :title="modal.title" :content="modal.content" :createdAt="modal.createdAt" />
+	</Teleport>
 	<template v-if="posts && posts.length > 0">
 		<hr class="my-5" />
 		<AppCard>
@@ -17,11 +20,12 @@
 	</template>
 </template>
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed, watchEffect, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { getPosts } from '@/api/posts';
 import PostItem from '@/components/posts/PostItem.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
+import PostModal from '@/components/posts/PostModal.vue';
 import AppLists from '@/components/AppLists.vue';
 import AppCard from '@/components/AppCard.vue';
 import AppPagination from '@/components/AppPagination.vue';
@@ -56,8 +60,21 @@ const goPage = id => {
 	router.push(`/posts/${id}`);
 	// router.push({ name: 'PostDetail', params: { id }, query: { searchText: 'hello' } });
 };
-
 const goPagination = page => {
 	params.value._page = page;
+};
+
+//modal
+const isShow = ref(false);
+const modal = reactive({
+	title: '',
+	content: '',
+	createdAt: '',
+});
+const openModal = ({ title, content, createdAt }) => {
+	isShow.value = true;
+	modal.title = title;
+	modal.content = content;
+	modal.createdAt = createdAt;
 };
 </script>

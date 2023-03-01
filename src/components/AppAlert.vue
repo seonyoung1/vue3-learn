@@ -1,5 +1,7 @@
 <template>
-	<div v-if="show" class="alert app-alert col-2 text-center" :class="typeClass" role="alert">{{ message }}</div>
+	<Transition name="slide">
+		<div v-if="show" class="alert app-alert col-2 text-center" :class="typeStyle" role="alert">{{ message }}</div>
+	</Transition>
 </template>
 <script setup>
 import { computed } from 'vue';
@@ -19,7 +21,7 @@ const props = defineProps({
 		validator: value => ['success', 'error'].includes(value),
 	},
 });
-const typeClass = computed(() => {
+const typeStyle = computed(() => {
 	return props.type === 'error' ? 'alert-danger' : 'alert-success';
 });
 </script>
@@ -28,5 +30,25 @@ const typeClass = computed(() => {
 	position: fixed;
 	top: 70px;
 	right: 10px;
+}
+.slide-enter-from {
+	opacity: 0;
+	transform: translateY(-30px);
+}
+.slide-enter-active {
+	transition: opacity, transform 0.5s ease;
+}
+.slide-enter-to {
+	opacity: 1;
+	transform: translateY(0);
+}
+.slide-leave-from {
+	opacity: 1;
+}
+.slide-leave-active {
+	transition: opacity 0.5s ease;
+}
+.slide-leave-to {
+	opacity: 0;
 }
 </style>

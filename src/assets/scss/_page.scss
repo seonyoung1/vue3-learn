@@ -4,3 +4,9 @@ body{
 input, button, a {
     font-family: inherit;
 }
+
+#modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+}
