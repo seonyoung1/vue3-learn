@@ -10,6 +10,14 @@
 	<!--		<AppCard>{{ item }}</AppCard>-->
 	<!--	</div>-->
 </template>
+<script>
+export default {
+	created() {
+		// console.log(this.$person.name);
+		// this.$person.say();
+	},
+};
+</script>
 <script setup>
 import AppLists from '@/components/AppLists.vue';
 import AppCard from '@/components/AppCard.vue';
