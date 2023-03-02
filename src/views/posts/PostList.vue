@@ -26,9 +26,6 @@ import { getPosts } from '@/api/posts';
 import PostItem from '@/components/posts/PostItem.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
 import PostModal from '@/components/posts/PostModal.vue';
-import AppLists from '@/components/AppLists.vue';
-import AppCard from '@/components/AppCard.vue';
-import AppPagination from '@/components/AppPagination.vue';
 import PostDetail from '@/views/posts/PostDetail.vue';
 
 const router = useRouter();

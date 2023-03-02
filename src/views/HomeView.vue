@@ -19,8 +19,6 @@ export default {
 };
 </script>
 <script setup>
-import AppLists from '@/components/AppLists.vue';
-import AppCard from '@/components/AppCard.vue';
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
 
