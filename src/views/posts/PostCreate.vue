@@ -13,7 +13,10 @@ import PostForm from '@/components/posts/PostForm.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { createPost } from '@/api/posts';
+import { useAlert } from '@/hooks/alert';
 
+// alert
+const { vAlert, vSuccess } = useAlert();
 const form = ref({
 	title: null,
 	content: null,
@@ -30,8 +33,10 @@ const savePost = () => {
 		};
 		createPost(data);
 		goListPage();
+		vSuccess('등록완료!');
 	} catch (err) {
 		console.error(err);
+		vAlert(err.message);
 	}
 };
 </script>

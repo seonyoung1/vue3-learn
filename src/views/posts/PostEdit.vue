@@ -43,7 +43,7 @@ const editPost = async () => {
 	try {
 		await updatePost(id, { ...form.value });
 		eventAlert('수정완료~', 'success');
-		// goDetailPage();
+		goDetailPage();
 	} catch (err) {
 		console.log(err);
 	}

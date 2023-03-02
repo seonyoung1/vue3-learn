@@ -2,7 +2,7 @@
 	<AppCard>
 		<h5 class="card-title">{{ title }}</h5>
 		<p class="card-text">{{ content }}</p>
-		<template v-slot:header>{{ createdAt }}</template>
+		<template v-slot:header>{{ date }}</template>
 		<template v-slot:footer>
 			<div class="d-flex flex-row-reverse">
 				<button class="btn" @click.stop="$emit('modal')">Open</button>
@@ -11,7 +11,9 @@
 	</AppCard>
 </template>
 <script setup>
-defineProps({
+import { computed, inject } from 'vue';
+
+const props = defineProps({
 	title: {
 		type: String,
 		required: true,
@@ -24,4 +26,6 @@ defineProps({
 	},
 });
 defineEmits(['modal']);
+const dayjs = inject('dayjs');
+const date = computed(() => dayjs(props.createdAt).format('YYYY-MM-DD HH:mm:ss'));
 </script>

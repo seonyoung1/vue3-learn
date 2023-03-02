@@ -1,29 +1,32 @@
 <template>
 	<Transition name="slide">
-		<div v-if="show" class="alert app-alert col-2 text-center" :class="typeStyle" role="alert">{{ message }}</div>
+		<div v-if="items.show" class="alert app-alert col-2 text-center" :class="typeStyle(items.type)" role="alert">{{ items.message }}</div>
 	</Transition>
 </template>
 <script setup>
-import { computed } from 'vue';
-
-const props = defineProps({
-	show: {
-		type: Boolean,
-		default: false,
-	},
-	message: {
+defineProps({
+	items: {
+		show: Boolean,
+		message: String,
 		type: String,
-		required: true,
-	},
-	type: {
-		type: String,
-		default: '',
-		validator: value => ['success', 'error'].includes(value),
+		// show: {
+		// 	type: Boolean,
+		// 	default: false,
+		// },
+		// message: {
+		// 	type: String,
+		// 	required: true,
+		// },
+		// type: {
+		// 	type: String,
+		// 	default: '',
+		// 	// validator: value => ['success', 'error'].includes(value),
+		// },
 	},
 });
-const typeStyle = computed(() => {
-	return props.type === 'error' ? 'alert-danger' : 'alert-success';
-});
+const typeStyle = type => {
+	return type === 'error' ? 'alert-danger' : 'alert-success';
+};
 </script>
 <style scoped>
 .app-alert {
