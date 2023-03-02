@@ -14,6 +14,7 @@
 					:created-at="item.createdAt"
 					@click="goPage(item.id)"
 					@modal="openModal(item)"
+					@preview="selectPreview(item.id)"
 				/>
 			</template>
 		</AppLists>
@@ -23,10 +24,10 @@
 	<Teleport to="#modal">
 		<PostModal v-model="isShow" :title="modal.title" :content="modal.content" :createdAt="modal.createdAt" />
 	</Teleport>
-	<template v-if="posts && posts.length > 0">
+	<template v-if="previewId">
 		<hr class="my-5" />
 		<AppCard>
-			<PostDetail :id="posts[0].id"></PostDetail>
+			<PostDetail :id="previewId"></PostDetail>
 		</AppCard>
 	</template>
 </template>
@@ -43,6 +44,11 @@ import { useAxios } from '@/hooks/useAxios';
 // import { getPosts } from '@/api/posts';
 
 const router = useRouter();
+const previewId = ref(null);
+const selectPreview = id => {
+	previewId.value = id;
+};
+
 // const error = ref(null);
 // const loading = ref(false);
 // const posts = ref([]);

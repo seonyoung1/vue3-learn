@@ -41,6 +41,7 @@ import { useRouter } from 'vue-router';
 // import { getPostById, deletePost } from '@/api/posts';
 import { useAxios } from '@/hooks/useAxios';
 import { useAlert } from '@/hooks/alert';
+import { computed } from 'vue';
 const { vAlert } = useAlert();
 // const error = ref(null);
 // const loading = ref(false);
@@ -54,7 +55,8 @@ const props = defineProps({
 
 const router = useRouter();
 // const post = ref({});
-const { data: post, error, loading } = useAxios(`/posts/${props.id}`);
+const url = computed(() => `/posts/${props.id}`);
+const { data: post, error, loading } = useAxios(url);
 const goListPage = () => {
 	router.push({ name: 'Posts' });
 };
