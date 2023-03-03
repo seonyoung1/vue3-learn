@@ -12,9 +12,9 @@ export const useAlertStore = defineStore('alert', {
 			this.message = message;
 			this.type = type;
 
-			// setTimeout(() => {
-			// 	this.show = false;
-			// }, 2000);
+			setTimeout(() => {
+				this.show = false;
+			}, 2000);
 		},
 		vSuccess(message) {
 			this.vAlert(message, 'success');

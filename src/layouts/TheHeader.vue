@@ -28,6 +28,9 @@
 						<li class="nav-item">
 							<RouterLink to="/nested" active-class="active" class="nav-link">Nested</RouterLink>
 						</li>
+						<li class="nav-item">
+							<RouterLink to="/my" active-class="active" class="nav-link">My</RouterLink>
+						</li>
 					</ul>
 					<form class="d-flex" role="search">
 						<button class="btn btn-outline-light" type="button" @click="goPage">New</button>

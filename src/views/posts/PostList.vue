@@ -1,12 +1,15 @@
 <template>
 	<h2>목록</h2>
 	<hr class="my-4" />
-	<PostFilter v-model:title="params.title_like" v-model:limit="params._limit"></PostFilter>
+	<PostFilter v-model:title="params.title_like" :limit="params._limit" @update:limit="changeLimit"></PostFilter>
 	<hr class="my-4" />
 	<AppLoading v-if="loading" />
 	<AppError v-else-if="error" :message="error.message" />
+	<template v-else-if="!isExist">
+		<p class="text-center py-5">no results</p>
+	</template>
 	<template v-else>
-		<AppLists :items="posts" col-class="col-4">
+		<AppLists :items="posts" col-class="col-12 col-md-6 col-lg-4">
 			<template v-slot="{ item }">
 				<PostItem
 					:title="item.title"
@@ -43,24 +46,28 @@ import { useRouter } from 'vue-router';
 import { useAxios } from '@/hooks/useAxios';
 // import { getPosts } from '@/api/posts';
 
+const params = ref({
+	_sort: 'createdAt',
+	_order: 'desc',
+	_page: 1,
+	_limit: 6,
+	title_like: '',
+});
 const router = useRouter();
 const previewId = ref(null);
 const selectPreview = id => {
 	previewId.value = id;
 };
+const changeLimit = value => {
+	params.value._limit = value;
+	params.value._page = 1;
+};
 
 // const error = ref(null);
 // const loading = ref(false);
 // const posts = ref([]);
-const params = ref({
-	_sort: 'createdAt',
-	_order: 'desc',
-	_page: 1,
-	_limit: 3,
-	title_like: '',
-});
 const { data: posts, error, loading, response } = useAxios('/posts', { params });
-
+const isExist = computed(() => posts.value && posts.value.length > 0);
 // const fetchPosts = async () => {
 // 	try {
 // 		loading.value = true;
@@ -78,7 +85,7 @@ const { data: posts, error, loading, response } = useAxios('/posts', { params })
 // fetchPosts 에서 사용한 반응형 상태가 변경되었을 때 다시 실행해줌
 // watchEffect(fetchPosts);
 
-console.log(response);
+// console.log(response);
 // pagination
 // const totalCount = ref(0);
 const totalCount = computed(() => response.value.headers['x-total-count']);
