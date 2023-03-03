@@ -1,7 +1,8 @@
-import { createApp } from 'vue';
-import App from './App.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/scss/style.scss';
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import App from './App.vue';
 import router from './router';
 import dayjs from './plugins/dayjs';
 // import funcPlugins from './plugins/func';
@@ -14,6 +15,7 @@ const app = createApp(App);
 // app.use(person);
 app.use(dayjs);
 app.use(router);
+app.use(createPinia());
 app.mount('#app');
 
 import 'bootstrap/dist/js/bootstrap.js';

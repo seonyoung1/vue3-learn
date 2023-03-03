@@ -1,29 +1,12 @@
 <template>
 	<Transition name="slide">
-		<div v-if="items.show" class="alert app-alert col-2 text-center" :class="typeStyle(items.type)" role="alert">{{ items.message }}</div>
+		<div v-if="show" class="alert app-alert col-2 text-center" :class="typeStyle(type)" role="alert">{{ message }}</div>
 	</Transition>
+	<p>{{ alerts }}</p>
 </template>
 <script setup>
-defineProps({
-	items: {
-		show: Boolean,
-		message: String,
-		type: String,
-		// show: {
-		// 	type: Boolean,
-		// 	default: false,
-		// },
-		// message: {
-		// 	type: String,
-		// 	required: true,
-		// },
-		// type: {
-		// 	type: String,
-		// 	default: '',
-		// 	// validator: value => ['success', 'error'].includes(value),
-		// },
-	},
-});
+import { useAlert } from '@/hooks/alert';
+const { show, message, type } = useAlert();
 const typeStyle = type => {
 	return type === 'error' ? 'alert-danger' : 'alert-success';
 };

@@ -5,15 +5,14 @@
 			<RouterView />
 		</div>
 	</main>
-	<AppAlert :items="alerts" />
+	<AppAlert />
 </template>
 
 <script setup>
 // import { ref } from 'vue';
 import TheHeader from '@/layouts/TheHeader.vue';
-import { useAlert } from '@/hooks/alert';
-
-const { alerts } = useAlert();
+// import { useAlert } from '@/hooks/alert';
+// const { alerts } = useAlert();
 </script>
 
 <style scoped></style>
